@@ -1,0 +1,14 @@
+{
+  "_output_dir": "/Users/ennyjole/Documents/Code/i-need-a-res",
+  "_template": "gh:cjolowicz/cookiecutter-hypermodern-python",
+  "author": "Enny Jole",
+  "copyright_year": "2022",
+  "development_status": "Development Status :: 1 - Planning",
+  "email": "me@engjole.net",
+  "friendly_name": "I Need A Res",
+  "github_user": "eng-jole",
+  "license": "MIT",
+  "package_name": "i_need_a_res",
+  "project_name": "i-need-a-res",
+  "version": "0.0.0"
+}
