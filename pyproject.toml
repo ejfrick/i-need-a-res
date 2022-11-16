@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "i-need-a-res"
-version = "0.0.0"
+version = "0.0.5"
 description = "I Need A Res"
 authors = ["Enny Jole <me@engjole.net>"]
 license = "MIT"
