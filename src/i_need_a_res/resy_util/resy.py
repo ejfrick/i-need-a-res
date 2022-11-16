@@ -1,6 +1,6 @@
 from datetime import datetime as dt
 from datetime import timedelta as td
-from random import randrange
+from random import choice
 from typing import List
 
 from i_need_a_res.geo_util.lib import GeoPoint
@@ -20,16 +20,13 @@ def _get_client(api_key: str, auth_token: str) -> ResyClient:
 
 
 def _get_random_reservation(restaurant_list: List[ResyVenue]) -> ReservationSlot:
-    rand_rest_index = randrange(0, len(restaurant_list) - 1)  # nosec B311
-    restaurant_choice = restaurant_list[rand_rest_index]
-    rand_slot_index = randrange(  # nosec B311
-        0, len(restaurant_choice.reservation_slots) - 1
-    )
-    slot_choice = restaurant_choice.reservation_slots[rand_slot_index]
+    restaurant_choice = choice(restaurant_list)  # nosec B311
+    while len(restaurant_choice.reservation_slots) == 0:
+        restaurant_choice = choice(restaurant_list)
+    slot_choice = choice(restaurant_choice.reservation_slots)  # nosec B311
     return slot_choice
 
 
-# TODO: add check for no slots, if no slots, then search_day += td(days=1)
 def get_reservation(
     api_key: str, auth_token: str, city: str, search_day: dt, party_size: int
 ) -> ReservationSlot:
