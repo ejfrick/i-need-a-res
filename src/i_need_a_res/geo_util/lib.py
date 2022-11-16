@@ -1,6 +1,5 @@
 from typing import NamedTuple
 
-from geopy.adapters import AioHTTPAdapter
 from geopy.geocoders import Nominatim
 
 
