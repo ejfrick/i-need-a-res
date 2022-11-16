@@ -144,8 +144,10 @@ jobs:
           nox --session=coverage
 
       - name: Create coverage report
+        if: success() || failure()
         run: |
           nox --session=coverage -- xml
 
       - name: Upload coverage report
+        if: success() || failure()
         uses: codecov/codecov-action@v3.1.0
