@@ -2,7 +2,12 @@
 import click
 
 from i_need_a_res.lib import return_prettified_valid_cities
+from i_need_a_res.opentable_util.lib import OpenTableCities
+from i_need_a_res.opentable_util.opentable import (
+    get_reservation as get_opentable_reservation,
+)
 from i_need_a_res.resy_util.lib import ResyCities
+from i_need_a_res.resy_util.resy import get_reservation as get_resy_reservation
 
 
 @click.command()
