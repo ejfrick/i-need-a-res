@@ -10,7 +10,7 @@ from requests.sessions import Session
 
 from i_need_a_res.geo_util.lib import GeoPoint
 from i_need_a_res.geo_util.lib import convert_to_geopoint
-from i_need_a_res.lib import Reservation
+from i_need_a_res.lib import ReservationSlot
 from i_need_a_res.resy_util.lib import ResyAuth
 from i_need_a_res.resy_util.lib import ResyVenue
 
@@ -75,24 +75,27 @@ class ResyClient:
             venue_coordinates = convert_to_geopoint(
                 latitude=venue_lat, longitude=venue_lon
             )
-            venue_reservation_slots: List[Reservation] = []
+            venue_reservation_slots: List[ReservationSlot] = []
             for slot in venue["slots"]:
                 slot_time = dt.strptime(slot["date"]["start"], "%Y-%m-%d %H:%M:%S")
                 slot_token = slot["config"]["token"]
                 venue_reservation_slots.append(
-                    Reservation(time=slot_time, token=slot_token)
+                    ReservationSlot(
+                        restaurant_name=venue_name, time=slot_time, token=slot_token
+                    )
                 )
 
-            list_of_venues.append(
-                ResyVenue(
-                    venue_id=venue_id,
-                    name=venue_name,
-                    cuisine=venue_type,
-                    price_range=venue_price_range,
-                    rating=venue_rating,
-                    coordinates=venue_coordinates,
-                    reservation_slots=venue_reservation_slots,
+            if len(venue_reservation_slots) > 0:
+                list_of_venues.append(
+                    ResyVenue(
+                        venue_id=venue_id,
+                        name=venue_name,
+                        cuisine=venue_type,
+                        price_range=venue_price_range,
+                        rating=venue_rating,
+                        coordinates=venue_coordinates,
+                        reservation_slots=venue_reservation_slots,
+                    )
                 )
-            )
 
         return list_of_venues
