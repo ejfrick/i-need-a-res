@@ -29,7 +29,6 @@ def _get_random_reservation(restaurant_list: List[ResyVenue]) -> ReservationSlot
     return slot_choice
 
 
-# TODO: add check for no slots, if no slots, then search_day += td(days=1)
 def get_reservation(
     api_key: str, auth_token: str, city: str, search_day: dt, party_size: int
 ) -> ReservationSlot:
