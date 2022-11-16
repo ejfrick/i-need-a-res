@@ -33,13 +33,18 @@ A command line tool to find and book you a random reservation in your city, beca
 
 ## Requirements
 
-- TODO
-
+- Python 3.10
+- `pip install poetry pre-commit`
+- `poetry install && pre-commit install`
+- Log into Resy, open your browser console, and grab the values from the `Authorization` and `X-Resy-Auth-Token` headers.
+- Save _just the alphanumeric strings_ from these somewhere in your shell as, for example, `RESY_API_KEY` and `RESY_AUTH_TOKEN`
+- `poetry run i-need-a-res --help`
+- Pass in the envvars under the `--resy-auth` flag when you're ready to go.
 <!-- ## Installation
 
 You can install _I Need A Res_ via [pip] from [PyPI]:
 
-```console
+````console
 pip install i-need-a-res
 ``` -->
 
@@ -77,3 +82,4 @@ This project was generated from [@cjolowicz]'s [Hypermodern Python Cookiecutter]
 [license]: https://github.com/eng-jole/i-need-a-res/blob/main/LICENSE
 [contributor guide]: https://github.com/eng-jole/i-need-a-res/blob/main/CONTRIBUTING.md
 [command-line reference]: https://i-need-a-res.readthedocs.io/en/latest/usage.html
+````
