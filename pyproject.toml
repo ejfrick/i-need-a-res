@@ -65,7 +65,7 @@ source = ["i_need_a_res", "tests"]
 
 [tool.coverage.report]
 show_missing = true
-fail_under = 10
+fail_under = 1
 
 [tool.isort]
 profile = "black"
