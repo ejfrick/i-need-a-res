@@ -10,11 +10,13 @@ Here is a list of important resources for contributors:
 - [Documentation]
 - [Issue Tracker]
 - [Code of Conduct]
+- [Roadmap]
 
 [mit license]: https://opensource.org/licenses/MIT
 [source code]: https://github.com/eng-jole/i-need-a-res
 [documentation]: https://i-need-a-res.readthedocs.io/
 [issue tracker]: https://github.com/eng-jole/i-need-a-res/issues
+[roadmap]: https://github.com/ENG-Jole/i-need-a-res/milestones
 
 ## How to report a bug
 
@@ -37,7 +39,7 @@ Request features on the [Issue Tracker].
 
 ## How to set up your development environment
 
-You need Python 3.7+ and the following tools:
+You need Python 3.10+ and the following tools:
 
 - [Poetry]
 - [Nox]
@@ -97,7 +99,8 @@ Your pull request needs to meet the following guidelines for acceptance:
 - Include unit tests. This project maintains 100% code coverage.
 - If your changes add functionality, update the documentation accordingly.
 
-Feel free to submit early, though—we can always iterate on this.
+Feel free to submit early, though—we can always iterate on this. Pre-beta, we are much more lax on checks; your PR will most likely be accepted if the targeted issue is successfuly resolved.
+_We do not use merge commits_. Please only squash and merge PRs.
 
 To run linting and code formatting checks before committing your change, you can install pre-commit as a Git hook by running the following command:
 
@@ -109,6 +112,41 @@ It is recommended to open an issue before starting work on anything.
 This will allow a chance to talk it over with the owners and validate your approach.
 
 [pull request]: https://github.com/eng-jole/i-need-a-res/pulls
+
+## Versioning & releases
+
+### Versioning
+
+We generally follow [semantic versioning]:
+
+> Given a version number MAJOR.MINOR.PATCH, increment the:
+>
+> MAJOR version when you make incompatible API changes\
+> MINOR version when you add functionality in a backwards compatible manner\
+> PATCH version when you make backwards compatible bug fixes
+
+We use [GitHub milestones] to indicate when we've reached a new release.
+We tag commits on `main`, create a GitHub release, and keep a branch for each new release.
+`main` should be treated as the latest possible "stable" version of the software.
+It may not be feature complete, and the next commit to `main` may be a breaking change.
+
+### Release process
+
+1. Coordinate with contributors on who will cut the release.
+2. Make your your local repo is up to date with `git fetch && git pull main`.
+3. Run `git switch --create v<version> main`.
+4. Run `poetry version <version>`. Do not include the `v` this time. Alternatively run `poetry version <bump_rule>` and provide a valid [bump rule].
+5. If needed, update the [trove classifiers] in `pyproject.toml`
+6. Run `git commit -m "I Need A Res v<version>" pyproject.toml`
+7. Run `git push origin v<version>`
+8. Open a pull request into `main` and get reviewed.
+9. Squash and merge once all criteria are met. _Do not delete the branch_.
+10. Contact a repo administrator to add the branch to the branch protection rules.
+
+[semantic versioning]: (https://semver.org)
+[github milestones]: (https://github.com/ENG-Jole/i-need-a-res/milestones)
+[bump rule]: (https://python-poetry.org/docs/cli/#version)
+[trove classifiers]: (https://pypi.org/classifiers/)
 
 <!-- github-only -->
 
