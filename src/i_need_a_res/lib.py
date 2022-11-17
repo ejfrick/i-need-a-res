@@ -16,6 +16,7 @@ from typing import NamedTuple
 
 class ReservationProvider(Enum):
     """Data class to store available reservation providers."""
+
     RESY = auto()
     OPENTABLE = auto()
 
