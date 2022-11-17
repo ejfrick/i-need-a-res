@@ -1,4 +1,9 @@
-"""Various helper functions and classes used by the provider modules and CLI."""
+"""Various helper functions and classes used by the provider modules and CLI.
+
+Todo:
+    * fix weird ResyCity/OpenTableCity not being classed as Enums to eliminate circular dependency and ugly workaround
+
+"""
 
 from datetime import datetime as dt
 from datetime import timedelta as td
@@ -70,7 +75,13 @@ def check_if_valid_city(candidate_city: str, city_list: Enum) -> bool:
         return False
 
 
-def return_prettified_valid_cities(city_list: Enum) -> List[str]:
+from i_need_a_res.opentable_util.lib import OpenTableCities
+from i_need_a_res.resy_util.lib import ResyCities
+
+
+def return_prettified_valid_cities(
+    city_list: Enum | ResyCities | OpenTableCities,
+) -> List[str]:
     """Returns the member names of a Enum as a list of title case strings.
 
     Args:
@@ -83,7 +94,7 @@ def return_prettified_valid_cities(city_list: Enum) -> List[str]:
         Eliminate this function by creating a Enum class that provider-level city lists inherit from that has a similar method.
 
     """
-    return [city.name.replace("_", " ").title() for city in city_list]  # type: ignore[attr-defined]
+    return [city.name.replace("_", " ").title() for city in city_list]  # type: ignore[union-attr]
 
 
 def convert_book_date_to_datetime(book_date: str) -> dt:
