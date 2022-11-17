@@ -1,3 +1,10 @@
+"""Module for Resy-specific handling of reservations.
+
+Todo:
+    * add booking of reservations for v1.0.0
+
+"""
+
 from datetime import datetime as dt
 from datetime import timedelta as td
 from random import choice
@@ -22,7 +29,7 @@ def _get_client(api_key: str, auth_token: str) -> ResyClient:
 def _get_random_reservation(restaurant_list: List[ResyVenue]) -> ReservationSlot:
     restaurant_choice = choice(restaurant_list)  # nosec B311
     while len(restaurant_choice.reservation_slots) == 0:
-        restaurant_choice = choice(restaurant_list)
+        restaurant_choice = choice(restaurant_list)  # nosec B311
     slot_choice = choice(restaurant_choice.reservation_slots)  # nosec B311
     return slot_choice
 
@@ -30,6 +37,25 @@ def _get_random_reservation(restaurant_list: List[ResyVenue]) -> ReservationSlot
 def get_reservation(
     api_key: str, auth_token: str, city: str, search_day: dt, party_size: int
 ) -> ReservationSlot:
+    """Function to orchestrate getting a random reservation.
+
+    Args:
+        api_key: Resy API key
+        auth_token: Resy user JWT token
+        city: city to search for reservations in
+        search_day: day to search reservations for
+        party_size:
+
+    Returns:
+        A ReservationSlot object
+
+        Example:
+            ReservationSlot("The French Laundry", datetime(2023, 01, 01, 19, 00), "some_token_value")
+
+    Raises:
+        LocationError: if city is not a supported Resy city.
+
+    """
     if not check_if_valid_city(candidate_city=city, city_list=ResyCities):  # type: ignore[arg-type]
         raise LocationError(f"City {city} is not a valid city. Valid cities are {return_prettified_valid_cities(ResyCities)}")  # type: ignore[arg-type]
 
