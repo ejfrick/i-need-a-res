@@ -10,12 +10,12 @@ from datetime import timedelta as td
 from enum import Enum
 from enum import auto
 from typing import List
-from typing import Literal
 from typing import NamedTuple
 
 
 class ReservationProvider(Enum):
     """Data class to store available reservation providers."""
+
     RESY = auto()
     OPENTABLE = auto()
 
