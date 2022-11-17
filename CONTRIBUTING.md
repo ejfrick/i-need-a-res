@@ -143,10 +143,10 @@ It may not be feature complete, and the next commit to `main` may be a breaking 
 9. Squash and merge once all criteria are met. _Do not delete the branch_.
 10. Contact a repo administrator to add the branch to the branch protection rules.
 
-[semantic versioning]: (https://semver.org)
-[github milestones]: (https://github.com/ENG-Jole/i-need-a-res/milestones)
-[bump rule]: (https://python-poetry.org/docs/cli/#version)
-[trove classifiers]: (https://pypi.org/classifiers/)
+[semantic versioning]: https://semver.org
+[github milestones]: https://github.com/ENG-Jole/i-need-a-res/milestones
+[bump rule]: https://python-poetry.org/docs/cli/#version
+[trove classifiers]: https://pypi.org/classifiers/
 
 <!-- github-only -->
 
