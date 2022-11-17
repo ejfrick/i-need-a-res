@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "i-need-a-res"
-version = "0.0.6"
+version = "0.0.7"
 description = "I Need A Res"
 authors = ["Enny Jole <me@engjole.net>"]
 license = "MIT"
@@ -9,7 +9,7 @@ homepage = "https://github.com/eng-jole/i-need-a-res"
 repository = "https://github.com/eng-jole/i-need-a-res"
 documentation = "https://i-need-a-res.readthedocs.io"
 classifiers = [
-    "Development Status :: 1 - Planning",
+    "Development Status :: 2 - Pre-Alpha",
 ]
 
 [tool.poetry.urls]
