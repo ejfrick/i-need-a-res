@@ -36,7 +36,7 @@ class ReservationSlot(NamedTuple):
 
         Example:
             >>> print(str(ReservationSlot("The French Laundry", datetime(2023, 01, 01, 19, 00), "some_token_value"))
-            "a reservation at The French Laundry at 19:00 on 01/01"
+                "a reservation at The French Laundry at 19:00 on 01/01"
 
         """
         hour_min = self.time.strftime("%H:%M")
@@ -94,14 +94,6 @@ def convert_book_date_to_datetime(book_date: str) -> dt:
 
     Returns:
         A datetime object representation of the book date.
-
-    Example:
-        >>> datetime.now()
-        datetime(2022, 11, 16, 18, 05, 40)
-        >>> convert_book_date_to_datetime("today")
-        datetime(2022, 11, 16, 18, 05, 40)
-        >>> convert_book_date_to_datetime("01/01/23")
-        datetime(2023, 01, 01, 00, 00, 00)
 
     """
     if book_date.lower() == "today":
