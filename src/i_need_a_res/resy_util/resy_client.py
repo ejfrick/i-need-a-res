@@ -15,6 +15,7 @@ from requests.sessions import Session
 
 from i_need_a_res.geo_util.lib import GeoPoint
 from i_need_a_res.geo_util.lib import convert_to_geopoint
+from i_need_a_res.lib import ReservationProvider
 from i_need_a_res.lib import ReservationSlot
 from i_need_a_res.resy_util.lib import ResyAuth
 from i_need_a_res.resy_util.lib import ResyVenue
@@ -112,7 +113,10 @@ class ResyClient:
                 slot_token = slot["config"]["token"]
                 venue_reservation_slots.append(
                     ReservationSlot(
-                        restaurant_name=venue_name, time=slot_time, token=slot_token
+                        restaurant_name=venue_name,
+                        time=slot_time,
+                        token=slot_token,
+                        reservation_provider=ReservationProvider.RESY,
                     )
                 )
 
