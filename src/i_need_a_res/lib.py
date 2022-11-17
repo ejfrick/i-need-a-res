@@ -1,19 +1,28 @@
 from datetime import datetime as dt
 from datetime import timedelta as td
 from enum import Enum
+from enum import auto
 from typing import List
+from typing import Literal
 from typing import NamedTuple
+
+
+class ReservationProvider(Enum):
+    RESY = auto()
+    OPENTABLE = auto()
 
 
 class ReservationSlot(NamedTuple):
     restaurant_name: str
     time: dt
     token: str
+    reservation_provider: ReservationProvider
 
     def __str__(self) -> str:
         """Returns ReservationSlot in human-friendly format."""
         hour_min = self.time.strftime("%H:%M")
-        return f"a reservation at {self.restaurant_name} at {hour_min} on {self.time.month}/{self.time.day}"
+        provider = str(ReservationProvider.name)
+        return f"a reservation at {self.restaurant_name} at {hour_min} on {self.time.month}/{self.time.day} from {provider.title()}"
 
 
 class LocationError(ValueError):
