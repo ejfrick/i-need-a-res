@@ -10,12 +10,15 @@ from datetime import timedelta as td
 from enum import Enum
 from enum import auto
 from typing import List
-from typing import Literal
 from typing import NamedTuple
 
 
 class ReservationProvider(Enum):
-    """Data class to store available reservation providers."""
+    """Data class to store available reservation providers.
+
+    Currently, only Resy and OpenTable are supported.
+
+    """
 
     RESY = auto()
     OPENTABLE = auto()
@@ -24,18 +27,18 @@ class ReservationProvider(Enum):
 class ReservationSlot(NamedTuple):
     """Immutable data structure for reservation slots.
 
-    Attributes:
-        restaurant_name:
-        time: datetime object of the reservation
-        token: the reservation provider token for the particular reservation slot
-        reservation_provider: Resy or OpenTable
+    Parameters:
+        restaurant_name: Name of the restaurant
+        time: Time of reservation
+        token: Reservation provider token
+        reservation_provider: Name of provider
 
     """
 
-    restaurant_name: str
-    time: dt
-    token: str
-    reservation_provider: ReservationProvider
+    restaurant_name: str  #: Name of the restaurant
+    time: dt  #: Time of reservation
+    token: str  #: Reservation provider token
+    reservation_provider: ReservationProvider  #: Name of provider
 
     def __str__(self) -> str:
         """Returns the ReservationSlot in a human-friendly format.
@@ -63,7 +66,7 @@ def check_if_valid_city(candidate_city: str, city_list: Enum) -> bool:
         Can also be used to validate if any str is in an Enum with auto() values.
 
     Args:
-        candidate_city:
+        candidate_city: city to check
         city_list: an Enum with string literal member names.
 
     Returns:

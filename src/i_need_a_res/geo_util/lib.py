@@ -11,14 +11,14 @@ USER_AGENT = str(__import__(__name__.split(".")[0]))
 class GeoPoint(NamedTuple):
     """Dataclass for geolocations.
 
-    Attributes:
+    Parameters:
         latitude: latitude of location
         longitude: longitude of location
 
     """
 
-    latitude: float
-    longitude: float
+    latitude: float  #: latitude of location
+    longitude: float  #: longitude of location
 
 
 def convert_to_geopoint(latitude: str, longitude: str) -> GeoPoint:

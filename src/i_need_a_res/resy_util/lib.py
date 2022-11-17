@@ -33,8 +33,8 @@ class ResyAuth(AuthBase):
             auth_token: Resy user JWT token
 
         """
-        self.api_key = api_key
-        self.auth_token = auth_token
+        self.api_key = api_key  #: Resy API key
+        self.auth_token = auth_token  #: Resy user JWT token
 
     def __call__(self, r: PreparedRequest) -> PreparedRequest:
         """Adds appropriate authorization headers to each request."""
@@ -58,13 +58,15 @@ class ResyVenue:
 
     """
 
-    venue_id: int
-    name: str
-    cuisine: str
-    price_range: int
-    rating: float
-    coordinates: GeoPoint
-    reservation_slots: List[ReservationSlot]
+    venue_id: int  #: Resy unique ID of the venue
+    name: str  #: Name of the venue
+    cuisine: str  #: Type of food the venue serves
+    price_range: int  #: Price range of the venue, from 1 to 4.
+    rating: float  #: Rating of the venue from Resy reviews
+    coordinates: GeoPoint  #: Latitude and longitude of the venue.
+    reservation_slots: List[
+        ReservationSlot
+    ]  #: a list of ReservationSlot objects representing the available slots.
 
 
 class ResyCities(Enum):

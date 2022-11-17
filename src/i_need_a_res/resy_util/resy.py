@@ -44,13 +44,13 @@ def get_reservation(
         auth_token: Resy user JWT token
         city: city to search for reservations in
         search_day: day to search reservations for
-        party_size:
+        party_size: size of the party
 
     Returns:
         A ReservationSlot object
 
         Example:
-            ReservationSlot("The French Laundry", datetime(2023, 01, 01, 19, 00), "some_token_value")
+            >>> ReservationSlot("The French Laundry", datetime(2023, 01, 01, 19, 00), "some_token_value")
 
     Raises:
         LocationError: if city is not a supported Resy city.
