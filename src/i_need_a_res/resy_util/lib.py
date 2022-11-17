@@ -1,3 +1,9 @@
+"""Resy-specific models.
+
+Todo:
+* refactor venue and city models to inherit from common base model
+
+"""
 from dataclasses import dataclass
 from enum import Enum
 from enum import auto
@@ -11,13 +17,27 @@ from i_need_a_res.lib import ReservationSlot
 
 
 class ResyAuth(AuthBase):
-    """Attaches Resy-required auth headers to the given Request or Session object."""
+    """Attaches Resy-required auth headers to the given Request or Session object.
+
+    Attributes:
+        api_key (str): Resy API key
+        auth_token (str): Resy user JWT token
+
+    """
 
     def __init__(self, api_key: str, auth_token: str) -> None:
+        """Initializes the class.
+
+        Args:
+            api_key: Resy API key
+            auth_token: Resy user JWT token
+
+        """
         self.api_key = api_key
         self.auth_token = auth_token
 
     def __call__(self, r: PreparedRequest) -> PreparedRequest:
+        """Adds appropriate authorization headers to each request."""
         r.headers["Authorization"] = f'ResyAPI api_key="{self.api_key}"'
         r.headers["X-Resy-Auth-Token"] = self.auth_token
         return r
@@ -25,6 +45,19 @@ class ResyAuth(AuthBase):
 
 @dataclass
 class ResyVenue:
+    """Mutable data structure for Resy venues.
+
+    Attributes:
+        venue_id: Resy unique ID of the venue
+        name: name of the venue
+        cuisine: type of food the venue serves
+        price_range: price range of the venue, from 1 to 4.
+        rating: rating of the venue from Resy reviews
+        coordinates: latitude and longitude of the venue.
+        reservation_slots: a list of ReservationSlot objects representing the available slots.
+
+    """
+
     venue_id: int
     name: str
     cuisine: str
@@ -35,6 +68,8 @@ class ResyVenue:
 
 
 class ResyCities(Enum):
+    """Data structure for the list of Resy-supported cities."""
+
     ATLANTA = auto()
     AUSTIN = auto()
     BERLIN = auto()
