@@ -1,4 +1,9 @@
-import logging
+"""Module for Resy API client.
+
+Todo:
+* add POST reservation routes for v1.0.0
+* add rest of GET routes (eventually)
+"""
 from datetime import datetime as dt
 from typing import Dict
 from typing import List
@@ -15,14 +20,29 @@ from i_need_a_res.resy_util.lib import ResyAuth
 from i_need_a_res.resy_util.lib import ResyVenue
 
 
-TResyClient = TypeVar("TResyClient")
 RESY_API_URL = "https://api.resy.com"
+"""str: Base URL for the Resy API"""
 
 
 class ResyClient:
+    """Class for Resy API client.
+
+    Attributes:
+        sesssion (requests.sessions.Session): Session for requests to the Resy API
+        session.auth (requests.sessions.Session.auth): Authorization information for the Resy API, persisting across requests.
+
+    """
+
     __attrs__ = ["session"]
 
     def __init__(self, api_key: str, auth_token: str) -> None:
+        """Initializes a session for API requests.
+
+        Args:
+            api_key: Resy API key
+            auth_token: Resy user JWT token
+
+        """
         self.session = Session()
         self.session.auth = ResyAuth(api_key=api_key, auth_token=auth_token)
 
@@ -46,6 +66,17 @@ class ResyClient:
     def get_venues(
         self, geolocation: GeoPoint, search_day: dt, party_size: int
     ) -> List[ResyVenue]:
+        """Method for returning all venues on Resy with available reservation slots for the given date, time, city, and party size.
+
+        Args:
+            geolocation: NamedTuple of the city's center coordinates
+            search_day: Day to search reservations for.
+            party_size: Size of party.
+
+        Returns:
+            A list of ResyVenue objects.
+
+        """
         lat = geolocation.latitude
         long = geolocation.longitude
         day = search_day.strftime("%Y-%m-%d")
