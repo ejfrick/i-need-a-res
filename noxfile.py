@@ -23,7 +23,7 @@ except ImportError:
 
 
 package = "i_need_a_res"
-python_versions = ["3.10", "3.9", "3.8", "3.7"]
+python_versions = ["3.10"]
 nox.needs_version = ">= 2021.6.6"
 nox.options.sessions = (
     "pre-commit",
@@ -146,7 +146,7 @@ def safety(session: Session) -> None:
     session.run("safety", "check", "--full-report", f"--file={requirements}")
 
 
-@session(python=python_versions)
+@session(python=python_versions[0])
 def mypy(session: Session) -> None:
     """Type-check using mypy."""
     args = session.posargs or ["src", "tests", "docs/conf.py"]
