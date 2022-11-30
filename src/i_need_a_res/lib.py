@@ -49,7 +49,7 @@ class ReservationSlot(NamedTuple):
 
         """
         hour_min = self.time.strftime("%H:%M")
-        provider = str(ReservationProvider.name)
+        provider = str(self.reservation_provider.name)
         return f"a reservation at {self.restaurant_name} at {hour_min} on {self.time.month}/{self.time.day} from {provider.title()}"
 
 
