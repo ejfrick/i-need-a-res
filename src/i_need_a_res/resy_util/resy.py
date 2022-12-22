@@ -7,31 +7,20 @@ Todo:
 
 from datetime import datetime as dt
 from datetime import timedelta as td
-from random import choice
-from typing import List
 
-from i_need_a_res.geo_util.lib import GeoPoint
 from i_need_a_res.geo_util.lib import get_city_geopoint
 from i_need_a_res.lib import LocationError
 from i_need_a_res.lib import ReservationSlot
 from i_need_a_res.lib import check_if_valid_city
+from i_need_a_res.lib import get_random_reservation
 from i_need_a_res.lib import return_prettified_valid_cities
 from i_need_a_res.resy_util.lib import ResyCities
-from i_need_a_res.resy_util.lib import ResyVenue
 from i_need_a_res.resy_util.resy_client import ResyClient
 
 
 def _get_client(api_key: str, auth_token: str) -> ResyClient:
     client = ResyClient(api_key=api_key, auth_token=auth_token)
     return client
-
-
-def _get_random_reservation(restaurant_list: List[ResyVenue]) -> ReservationSlot:
-    restaurant_choice = choice(restaurant_list)  # nosec B311
-    while len(restaurant_choice.reservation_slots) == 0:
-        restaurant_choice = choice(restaurant_list)  # nosec B311
-    slot_choice = choice(restaurant_choice.reservation_slots)  # nosec B311
-    return slot_choice
 
 
 def get_reservation(
@@ -74,6 +63,6 @@ def get_reservation(
             party_size=party_size,
         )
 
-    reservation = _get_random_reservation(candidates)
+    reservation = get_random_reservation(candidates)
 
     return reservation

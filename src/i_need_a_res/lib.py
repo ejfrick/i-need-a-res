@@ -9,6 +9,7 @@ from datetime import datetime as dt
 from datetime import timedelta as td
 from enum import Enum
 from enum import auto
+from random import choice
 from typing import List
 from typing import NamedTuple
 
@@ -79,12 +80,8 @@ def check_if_valid_city(candidate_city: str, city_list: Enum) -> bool:
         return False
 
 
-from i_need_a_res.opentable_util.lib import OpenTableCities
-from i_need_a_res.resy_util.lib import ResyCities
-
-
 def return_prettified_valid_cities(
-    city_list: Enum | ResyCities | OpenTableCities,
+    city_list: Enum,
 ) -> List[str]:
     """Returns the member names of a Enum as a list of title case strings.
 
@@ -119,3 +116,11 @@ def convert_book_date_to_datetime(book_date: str) -> dt:
         book_datetime = dt.strptime(book_date, "%m/%d/%Y")
 
     return book_datetime
+
+
+def get_random_reservation(restaurant_list: List) -> ReservationSlot:
+    restaurant_choice = choice(restaurant_list)  # nosec B311
+    while len(restaurant_choice.reservation_slots) == 0:
+        restaurant_choice = choice(restaurant_list)  # nosec B311
+    slot_choice = choice(restaurant_choice.reservation_slots)  # nosec B311
+    return slot_choice
