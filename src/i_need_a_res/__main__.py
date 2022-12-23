@@ -4,19 +4,18 @@ from typing import Tuple
 
 import click
 
-from i_need_a_res.lib import LocationError
-from i_need_a_res.lib import convert_book_date_to_datetime
-from i_need_a_res.lib import return_prettified_valid_cities
-from i_need_a_res.opentable_util.lib import OpenTableCities
-from i_need_a_res.opentable_util.opentable import (
+from i_need_a_res import LocationError
+from i_need_a_res import convert_book_date_to_datetime
+from i_need_a_res.providers.models import OpenTableCities
+from i_need_a_res.providers.models import ResyCities
+from i_need_a_res.providers.opentable import (
     get_reservation as get_opentable_reservation,
 )
-from i_need_a_res.resy_util.lib import ResyCities
-from i_need_a_res.resy_util.resy import get_reservation as get_resy_reservation
+from i_need_a_res.providers.resy import get_reservation as get_resy_reservation
 
 
 @click.command()
-@click.option("--city", type=click.Choice(return_prettified_valid_cities(ResyCities), case_sensitive=False), help="City to book the reservation in. Must be one of supported.")  # type: ignore[arg-type]
+@click.option("--city", type=click.Choice(ResyCities | OpenTableCities, case_sensitive=False), help="City to book the reservation in. Must be one of supported.")  # type: ignore[arg-type]
 @click.option("--party-members", type=int, help="Party size. Must be a number.")
 @click.option(
     "--book-date",

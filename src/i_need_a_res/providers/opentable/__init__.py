@@ -8,8 +8,8 @@ Todo:
 
 from datetime import datetime as dt
 
-from i_need_a_res.lib import ReservationProvider
-from i_need_a_res.lib import ReservationSlot
+from i_need_a_res.providers.models import ReservationProvider
+from i_need_a_res.providers.models import ReservationSlot
 
 
 def get_reservation(

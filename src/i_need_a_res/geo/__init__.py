@@ -1,4 +1,4 @@
-"""Helper functions and methods for geolocations."""
+"""Utils for geolocations."""
 from typing import NamedTuple
 
 from geopy.geocoders import Nominatim

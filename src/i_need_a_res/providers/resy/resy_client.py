@@ -7,22 +7,48 @@ Todo:
 from datetime import datetime as dt
 from typing import Dict
 from typing import List
-from typing import TypeVar
 
-import requests
 from requests import Response
+from requests.auth import AuthBase
+from requests.models import PreparedRequest
 from requests.sessions import Session
 
-from i_need_a_res.geo_util.lib import GeoPoint
-from i_need_a_res.geo_util.lib import convert_to_geopoint
-from i_need_a_res.lib import ReservationProvider
-from i_need_a_res.lib import ReservationSlot
-from i_need_a_res.resy_util.lib import ResyAuth
-from i_need_a_res.resy_util.lib import ResyVenue
+from i_need_a_res.geo import GeoPoint
+from i_need_a_res.geo import convert_to_geopoint
+from i_need_a_res.providers.models import ReservationProvider
+from i_need_a_res.providers.models import ReservationSlot
+from i_need_a_res.providers.models import Venue
 
 
 RESY_API_URL = "https://api.resy.com"
 """str: Base URL for the Resy API"""
+
+
+class ResyAuth(AuthBase):
+    """Attaches Resy-required auth headers to the given Request or Session object.
+
+    Attributes:
+        api_key (str): Resy API key
+        auth_token (str): Resy user JWT token
+
+    """
+
+    def __init__(self, api_key: str, auth_token: str) -> None:
+        """Initializes the class.
+
+        Args:
+            api_key: Resy API key
+            auth_token: Resy user JWT token
+
+        """
+        self.api_key = api_key  #: Resy API key
+        self.auth_token = auth_token  #: Resy user JWT token
+
+    def __call__(self, r: PreparedRequest) -> PreparedRequest:
+        """Adds appropriate authorization headers to each request."""
+        r.headers["Authorization"] = f'ResyAPI api_key="{self.api_key}"'
+        r.headers["X-Resy-Auth-Token"] = self.auth_token
+        return r
 
 
 class ResyClient:
@@ -66,7 +92,7 @@ class ResyClient:
 
     def get_venues(
         self, geolocation: GeoPoint, search_day: dt, party_size: int
-    ) -> List[ResyVenue]:
+    ) -> List[Venue]:
         """Method for returning all venues on Resy with available reservation slots for the given date, time, city, and party size.
 
         Args:
@@ -95,7 +121,7 @@ class ResyClient:
         if not resp.ok:
             resp.raise_for_status()
 
-        list_of_venues: List[ResyVenue] = []
+        list_of_venues: List[Venue] = []
         for venue in resp.json()["results"]["venues"]:
             venue_id = venue["venue"]["id"]["resy"]
             venue_name = venue["venue"]["name"]
@@ -122,7 +148,7 @@ class ResyClient:
 
             if len(venue_reservation_slots) > 0:
                 list_of_venues.append(
-                    ResyVenue(
+                    Venue(
                         venue_id=venue_id,
                         name=venue_name,
                         cuisine=venue_type,
