@@ -7,81 +7,45 @@
    :members:
 ```
 
-### lib
+### geo
 
 ```{eval-rst}
-.. automodule:: i_need_a_res.lib
+.. automodule:: i_need_a_res.geo
    :members:
    :special-members: __str__
 ```
 
-### geo_util
+### providers
 
 ```{eval-rst}
-.. automodule:: i_need_a_res.geo_util
+.. automodule:: i_need_a_res.providers
    :members:
 ```
 
-#### geo_util.lib
+#### providers.opentable
 
 ```{eval-rst}
-.. automodule:: i_need_a_res.geo_util.lib
+.. automodule:: i_need_a_res.providers.opentable
    :members:
 ```
 
-### opentable_util
+#### providers.resy
 
 ```{eval-rst}
-.. automodule:: i_need_a_res.opentable_util
+.. automodule:: i_need_a_res.providers.resy
    :members:
 ```
 
-#### opentable_util.lib
+##### providers.resy.resy_client
 
 ```{eval-rst}
-.. automodule:: i_need_a_res.opentable_util.lib
+.. automodule:: i_need_a_res.providers.resy.resy_client
    :members:
 ```
 
-#### opentable_util.opentable
+#### providers.models
 
 ```{eval-rst}
-.. automodule:: i_need_a_res.opentable_util.opentable
-   :members:
-```
-
-### resy_util
-
-```{eval-rst}
-.. automodule:: i_need_a_res.resy_util
-   :members:
-```
-
-#### resy_util.lib
-
-```{eval-rst}
-.. automodule:: i_need_a_res.resy_util.lib
-   :members:
-```
-
-#### resy_util.resy_client
-
-```{eval-rst}
-.. automodule:: i_need_a_res.resy_util.resy_client
-   :members:
-   :special-members: __init__
-```
-
-#### resy_util.resy
-
-```{eval-rst}
-.. automodule:: i_need_a_res.resy_util.resy
-   :members:
-```
-
-### review_util
-
-```{eval-rst}
-.. automodule:: i_need_a_res.review_util
+.. automodule:: i_need_a_res.providers.models
    :members:
 ```
